@@ -2,12 +2,15 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
+import { CustomStatesModule } from './custom-states/custom-states.module';
 import { ProjectsModule } from './projects/projects.module';
 import { CustomStatesModule } from './custom-states/custom-states.module';
 import { StatesModule } from './states/states.module';
 import { LabelsModule } from './labels/labels.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -19,7 +22,13 @@ import { MongooseModule } from '@nestjs/mongoose';
     ConfigModule.forRoot({
     envFilePath:'.env',
     }), 
-    MongooseModule.forRoot(`mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@localhost:27017/`)],
+    MongooseModule.forRoot(
+      process.env.MONGODB_URL
+      ??(
+        () => {throw new Error('La variable de entorno no está definida en el .env')}
+      )(),
+    ), UsersModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
