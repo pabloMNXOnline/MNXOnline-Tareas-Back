@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/commo
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { ObjectId, Types} from 'mongoose';
 
 @Controller('tasks')
 export class TasksController {
@@ -31,4 +32,10 @@ export class TasksController {
   remove(@Param('id') id: string) {
     return this.tasksService.remove(id);
   }
+
+  @Get('project/:id')
+    async findTasksbyProject(@Param('id') id: ObjectId){
+      return this.tasksService.findTasksbyProject(id);
+  }
+  
 }
