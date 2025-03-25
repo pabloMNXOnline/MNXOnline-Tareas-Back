@@ -27,7 +27,7 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    return this.taskModel.findByIdAndUpdate(id).exec();
+    return this.taskModel.findByIdAndUpdate(id,updateTaskDto).exec();
   }
 
   async remove(id: string) {
@@ -35,18 +35,22 @@ export class TasksService {
   }
 
   async findTasksbyProject(id: ObjectId){
-    return this.taskModel.find({project_id : id}).populate('project_id')
+    return this.taskModel.find({project : id}).populate('project')
   }
 
   async findTaskbyProjectAndUser(idProject: ObjectId, idUser: ObjectId){
     return this.taskModel.find({
       $and: [
-        { project_id: idProject },
-        { user_id: idUser }
+        { project: idProject },
+        { user: idUser }
       ]
     })
-    .populate('project_id')
-    .populate('user_id')
+    .populate('project')
+    .populate('user')
     .exec();
+  }
+
+  async findTaskbyStatus(id:ObjectId){
+    return this.taskModel.find({status:id}).populate('status');
   }
 }

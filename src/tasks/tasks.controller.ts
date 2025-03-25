@@ -37,5 +37,9 @@ export class TasksController {
     async findTasksbyProject(@Param('id') id: ObjectId){
       return this.tasksService.findTasksbyProject(id);
   }
-  
+
+  @Get('status/:id')
+    async findTaskbyStatus(@Param('id') id:ObjectId){
+      return this.tasksService.findTaskbyStatus(id)
+    }
 }
