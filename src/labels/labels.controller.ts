@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/commo
 import { LabelsService } from './labels.service';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
+import { ObjectId, Types} from 'mongoose';
 
 @Controller('labels')
 export class LabelsController {
@@ -18,17 +19,17 @@ export class LabelsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: ObjectId) {
     return this.labelsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLabelDto: UpdateLabelDto) {
+  update(@Param('id') id: ObjectId, @Body() updateLabelDto: UpdateLabelDto) {
     return this.labelsService.update(id, updateLabelDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: ObjectId) {
     return this.labelsService.remove(id);
   }
 }

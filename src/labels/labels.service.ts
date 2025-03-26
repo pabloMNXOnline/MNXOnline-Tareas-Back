@@ -3,7 +3,7 @@ import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
 import { Label } from './label.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 
 @Injectable()
 export class LabelsService {
@@ -12,24 +12,24 @@ export class LabelsService {
       @InjectModel(Label.name) private labelModel: Model<Label>
     ) { }
 
-  create(createLabelDto: CreateLabelDto) {
+  async create(createLabelDto: CreateLabelDto) {
     const createdLabel = new this.labelModel(createLabelDto);
     return createdLabel.save();
   }
 
-  findAll() {
+  async findAll() {
     return this.labelModel.find().exec();
   }
 
-  findOne(id: string) {
+  async findOne(id: ObjectId) {
     return this.labelModel.findById(id).exec();
   }
 
-  update(id: string, updateLabelDto: UpdateLabelDto) {
+  async update(id: ObjectId, updateLabelDto: UpdateLabelDto) {
     return this.labelModel.findByIdAndUpdate(id,updateLabelDto).exec();
   }
 
-  remove(id: string) {
+  async remove(id: ObjectId) {
     return this.labelModel.findByIdAndDelete(id).exec();
   }
 }

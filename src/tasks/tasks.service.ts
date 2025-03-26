@@ -22,15 +22,15 @@ export class TasksService {
     return this.taskModel.find().exec();
   }
 
-  async findOne(id: string) {
+  async findOne(id: ObjectId) {
     return this.taskModel.findById(id).exec();
   }
 
-  async update(id: string, updateTaskDto: UpdateTaskDto) {
+  async update(id: ObjectId, updateTaskDto: UpdateTaskDto) {
     return this.taskModel.findByIdAndUpdate(id,updateTaskDto).exec();
   }
 
-  async remove(id: string) {
+  async remove(id: ObjectId) {
     return this.taskModel.findByIdAndDelete(id).exec();
   }
 
