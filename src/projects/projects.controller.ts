@@ -37,4 +37,10 @@ export class ProjectsController {
   async getProjectsByUser(@Param('id') id: ObjectId){
     return this.projectsService.findProjectByUser(id);
   }
+
+  @Get(':id/users')
+  async findUsersByProject(@Param('id') id : ObjectId){
+    return this.projectsService.findUsersByProject(id);
+  }
+
 }

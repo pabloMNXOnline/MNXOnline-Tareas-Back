@@ -46,5 +46,8 @@ export class ProjectsService {
     .exec();
   }
 
+  async findUsersByProject(id: ObjectId){
+    return this.projectModel.findById(id).populate('user', 'username').populate('colaborators','username').exec();
+  }
   
 }

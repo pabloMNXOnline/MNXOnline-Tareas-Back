@@ -20,6 +20,7 @@ export class Task extends Thing {
 
     @Prop({ type: [Date], default: [] })
     statusHistoric: Date [];
+
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);
