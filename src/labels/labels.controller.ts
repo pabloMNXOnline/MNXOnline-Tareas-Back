@@ -32,4 +32,9 @@ export class LabelsController {
   remove(@Param('id') id: ObjectId) {
     return this.labelsService.remove(id);
   }
+
+  @Get('project/:id')
+  labelByProject(@Param('id') id : ObjectId){
+    return this.labelsService.labelByProject(id);
+  }
 }

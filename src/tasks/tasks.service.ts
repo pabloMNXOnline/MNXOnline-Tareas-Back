@@ -51,6 +51,6 @@ export class TasksService {
   }
 
   async findTaskbyStatus(id:ObjectId){
-    return this.taskModel.find({status:id}).populate('status').populate('user','username');
+    return this.taskModel.find({status:id}).populate('status').populate('user','username').populate('labels').exec();
   }
 }

@@ -32,4 +32,8 @@ export class LabelsService {
   async remove(id: ObjectId) {
     return this.labelModel.findByIdAndDelete(id).exec();
   }
+
+  async labelByProject( id : ObjectId){
+    return this.labelModel.find({project : id}).populate('project').exec();
+  }
 }
