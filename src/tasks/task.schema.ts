@@ -4,6 +4,7 @@ import { User } from 'src/users/user.schema';
 import { Status } from 'src/states/state.schema';
 import { Project } from 'src/projects/project.schema';
 import { Thing } from 'thing.schema';
+import { Label } from 'src/labels/label.schema';
 
 export type TaskDocument = HydratedDocument<Task>;
 
@@ -20,6 +21,11 @@ export class Task extends Thing {
 
     @Prop({ type: [Date], default: [] })
     statusHistoric: Date [];
+
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Label' }], default:[] })
+    labels: Label [] ; 
+
+
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);

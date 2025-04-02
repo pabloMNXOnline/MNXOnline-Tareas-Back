@@ -22,7 +22,7 @@ export class ProjectsService {
   }
 
   async findOne(id: ObjectId) {
-    return this.projectModel.findById(id).exec();
+    return this.projectModel.findById(id).populate('user').exec();
   }
 
   async update(id: ObjectId, updateProjectDto: UpdateProjectDto) {
@@ -46,5 +46,8 @@ export class ProjectsService {
     .exec();
   }
 
+  async findUsersByProject(id: ObjectId){
+    return this.projectModel.findById(id).populate('user', 'username').populate('colaborators','username').exec();
+  }
   
 }
