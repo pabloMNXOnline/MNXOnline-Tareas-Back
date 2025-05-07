@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { TaskstagsModule } from './taskstags/taskstags.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -25,7 +26,7 @@ import { TaskstagsModule } from './taskstags/taskstags.module';
       ??(
         () => {throw new Error('La variable de entorno no está definida en el .env')}
       )(),
-    ), UsersModule, TaskstagsModule,
+    ), UsersModule, TaskstagsModule, AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
